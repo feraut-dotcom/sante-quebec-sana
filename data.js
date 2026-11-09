@@ -101,7 +101,14 @@ window.APP_DATA = {
           choix: ["Les CHU", "Les GMF", "Les CLSC", "Les pharmacies"],
           bonne: 2,
           explication: "Le PQ a promis 150 M$ sur 4 ans pour faire des CLSC la porte d'entrée et rendre le réseau moins hospitalo-centrique."
-        }
+        },
+        { q: "Un usager a épuisé les recours de plainte de son établissement. À qui peut-il s'adresser ensuite ?", choix: ["Au Protecteur du citoyen", "Au Commissaire à la santé et au bien-être", "À l'INESSS", "À la RAMQ"], bonne: 0, explication: "Le Protecteur du citoyen agit en dernier recours pour les plaintes des usagers. Le CSBE évalue la performance globale, pas les plaintes.", difficile: true },
+        { q: "Un journaliste veut un avis d'expert sur l'évolution d'une épidémie de grippe. Quel organisme est le plus indiqué ?", choix: ["L'INSPQ", "L'INESSS", "La RAMQ", "Héma-Québec"], bonne: 0, explication: "L'INSPQ est le centre d'expertise et de surveillance en santé publique.", difficile: true },
+        { q: "Environ combien de personnes Santé Québec emploie-t-elle ?", choix: ["330 000", "33 000", "130 000", "1 million"], bonne: 0, explication: "Santé Québec est l'employeur unique d'environ 330 000 travailleurs du réseau depuis le 1er décembre 2024.", difficile: true },
+        { q: "Qui est sous-ministre de la Santé depuis le 2 novembre 2026 ?", choix: ["Martin Beaumont", "Geneviève Biron", "Christian Dubé", "Marie-Karlynn Laflamme"], bonne: 0, explication: "Martin Beaumont, ancien PDG de Santé Québec – CHU de Québec. Geneviève Biron dirige Santé Québec ; Marie-Karlynn Laflamme est ministre.", difficile: true },
+        { q: "Qu'est-ce qui distingue un CIUSSS d'un CISSS ?", choix: ["Sa mission universitaire (enseignement et recherche)", "Sa taille, toujours plus petite", "Il est géré par le privé", "Il ne couvre que les services sociaux"], bonne: 0, explication: "Le « U » signale une mission universitaire.", difficile: true },
+        { q: "Quelle est la mission principale d'un ordre professionnel comme l'OIIQ ?", choix: ["Protéger le public", "Défendre les salaires de ses membres", "Gérer les hôpitaux", "Négocier avec le gouvernement"], bonne: 0, explication: "Un ordre protège le public en encadrant la pratique ; c'est le syndicat qui défend les intérêts des membres.", difficile: true },
+        { q: "Quel comité veille à l'accès aux services pour les personnes d'expression anglaise ?", choix: ["Le Comité national pour la prestation des services de santé et des services sociaux en langue anglaise", "L'Office québécois de la langue française", "Le Protecteur du citoyen", "L'INESSS"], bonne: 0, explication: "Ce comité fait partie du portefeuille de la santé et conseille sur l'accès aux services en anglais.", difficile: true }
       ]
     },
 
@@ -186,7 +193,13 @@ window.APP_DATA = {
           choix: ["Les murs des vieux hôpitaux", "Une solution uniforme imposée partout", "Les listes d'attente", "Les heures supplémentaires"],
           bonne: 1,
           explication: "Le mur-à-mur désigne une règle identique pour toutes les régions, sans tenir compte des réalités locales."
-        }
+        },
+        { q: "Quel ordre chronologique est correct ?", choix: ["Loi 10, puis loi 15, puis loi 2", "Loi 15, puis loi 10, puis loi 2", "Loi 2, puis loi 10, puis loi 15", "Loi 10, puis loi 2, puis loi 15"], bonne: 0, explication: "Loi 10 en 2015 (fusion), loi 15 en 2023 (Santé Québec), loi 2 en 2025 (rémunération des médecins).", difficile: true },
+        { q: "Quelles structures la loi 10 a-t-elle abolies en 2015 ?", choix: ["Les agences régionales de santé", "Les CLSC", "Les GMF", "Les ordres professionnels"], bonne: 0, explication: "Les agences régionales ont disparu ; leurs fonctions ont été reprises par les CISSS, les CIUSSS et le ministère.", difficile: true },
+        { q: "Quel ministre est associé au Plan santé et à la création de Santé Québec ?", choix: ["Christian Dubé", "Gaétan Barrette", "Sonia Bélanger", "Lionel Carmant"], bonne: 0, explication: "Christian Dubé a porté le Plan santé (2022) et la loi 15 (2023). Gaétan Barrette est associé à la loi 10.", difficile: true },
+        { q: "De combien l'entente de décembre 2025 a-t-elle bonifié l'enveloppe des médecins de famille ?", choix: ["14,5 %, soit 435 M$", "5 %, soit 150 M$", "25 %, soit 1 G$", "Aucune hausse"], bonne: 0, explication: "L'entente FMOQ prévoit une hausse de 14,5 % (435 M$), en échange de cibles de prise en charge.", difficile: true },
+        { q: "Pourquoi la loi 2 a-t-elle provoqué une crise en 2025 ?", choix: ["Adoptée sous bâillon, elle imposait cibles et sanctions ; des médecins ont quitté le Québec ou pris leur retraite", "Elle abolissait la RAMQ", "Elle interdisait la télémédecine", "Elle fermait des urgences"], bonne: 0, explication: "Le gouvernement a ensuite suspendu la loi et négocié une entente avec la FMOQ.", difficile: true },
+        { q: "Quelle part de la rémunération des médecins de famille repose sur la capitation depuis juin 2026 ?", choix: ["50 %", "20 %", "30 %", "100 %"], bonne: 0, explication: "50 % capitation, 30 % acte, 20 % tarif horaire.", difficile: true }
       ]
     },
 
@@ -257,7 +270,12 @@ window.APP_DATA = {
           choix: ["Seulement administrer des vaccins", "Diagnostiquer, prescrire et suivre une clientèle", "Diriger un CISSS", "Remplacer un pharmacien"],
           bonne: 1,
           explication: "Les infirmières praticiennes spécialisées ont un rôle élargi en première ligne, proche de celui du médecin pour certains suivis."
-        }
+        },
+        { q: "Samedi, une personne sans médecin de famille a mal à l'oreille. Que lui conseiller avant l'urgence ?", choix: ["Appeler le 811 ou passer par le GAP, ou consulter un pharmacien", "Aller directement à l'urgence", "Attendre d'être inscrite au GAMF", "Appeler la RAMQ"], bonne: 0, explication: "Le 811, le GAP et le pharmacien sont les portes d'entrée prévues pour un besoin ponctuel non urgent.", difficile: true },
+        { q: "Que propose la ligne 811 Info-Social ?", choix: ["Une consultation avec un intervenant psychosocial", "Un rendez-vous avec un médecin", "Le renouvellement d'ordonnances", "Une inscription au GAMF"], bonne: 0, explication: "Info-Santé répond avec une infirmière ; Info-Social avec un intervenant psychosocial.", difficile: true },
+        { q: "Pourquoi parle-t-on de plus en plus de « prise en charge » plutôt que de « médecin de famille » ?", choix: ["Parce que le suivi peut être assuré par une équipe ou un milieu de soins, pas seulement par un médecin", "Parce que les médecins de famille ont disparu", "Parce que c'est un terme anglais", "Parce que la RAMQ l'impose aux patients"], bonne: 0, explication: "La prise en charge inclut les IPS, les infirmières et l'équipe interdisciplinaire d'un GMF.", difficile: true },
+        { q: "Quelle était la cible initiale du Plan santé en matière de prise en charge ?", choix: ["Les 8,5 millions de Québécois d'ici l'été 2026", "5 millions d'ici 2030", "Tous les enfants d'ici 2024", "7,6 millions d'ici 2025"], bonne: 0, explication: "La cible a ensuite été ramenée à 7,6 millions au 30 juin 2026 dans l'entente avec la FMOQ.", difficile: true },
+        { q: "Que signifie « pertinence des soins » ?", choix: ["Offrir le bon soin, au bon moment, à la bonne personne", "Offrir le plus de soins possible", "Réduire le nombre de médecins", "Facturer chaque acte"], bonne: 0, explication: "Éviter les soins inutiles libère des ressources pour ceux qui en ont besoin.", difficile: true }
       ]
     },
 
@@ -320,7 +338,11 @@ window.APP_DATA = {
           choix: ["85 %", "100 %", "124 %", "160 %"],
           bonne: 2,
           explication: "Santé Québec a rapporté un sommet de 124 % pour l'ensemble du Québec en février 2025."
-        }
+        },
+        { q: "Un patient opéré attend depuis trois semaines à l'hôpital une place en CHSLD. Comment le qualifie-t-on ?", choix: ["Patient NSA", "Patient orphelin", "Patient partenaire", "Patient d'exception"], bonne: 0, explication: "NSA : niveau de soins alternatif. Il n'a plus besoin de soins aigus mais occupe un lit.", difficile: true },
+        { q: "Laquelle de ces mesures agit sur la sortie de l'hôpital plutôt que sur l'entrée ?", choix: ["Augmenter le soutien à domicile et les places d'hébergement", "Faire la promotion du 811", "Ouvrir plus de plages au GAP", "Élargir le rôle des pharmaciens"], bonne: 0, explication: "Libérer les patients NSA fait de la place aux étages et désengorge l'urgence.", difficile: true },
+        { q: "Selon l'IEDM, quelle était la durée médiane de séjour à l'urgence en 2025 ?", choix: ["Environ 5 h 12", "Environ 1 h 30", "Environ 12 h", "Environ 24 h"], bonne: 0, explication: "La durée médiane globale était de 5 h 12 ; la durée moyenne sur civière, elle, tourne autour de 18 à 19 heures.", difficile: true },
+        { q: "Que signifie un taux d'occupation des civières de 124 % ?", choix: ["Il y a plus de patients sur civière que de civières prévues", "24 % des civières sont libres", "Les urgences sont fermées", "Les patients attendent 124 minutes"], bonne: 0, explication: "Au-delà de 100 %, des patients sont installés dans les corridors ou sur des civières supplémentaires.", difficile: true }
       ]
     },
 
@@ -385,7 +407,11 @@ window.APP_DATA = {
           choix: ["Un syndicat", "Un ordre professionnel qui encadre la pratique infirmière", "Une agence de placement", "Un organisme de recherche"],
           bonne: 1,
           explication: "L'Ordre des infirmières et infirmiers du Québec protège le public en encadrant la profession."
-        }
+        },
+        { q: "Pourquoi le recours à la main-d'œuvre indépendante est-il critiqué ?", choix: ["Il coûte plus cher et déstabilise les équipes", "Il est interdit par la loi depuis 2010", "Il ne concerne que les médecins", "Il réduit les listes d'attente"], bonne: 0, explication: "Les agences coûtent cher, créent des écarts de conditions et nuisent à la stabilité des équipes.", difficile: true },
+        { q: "Qui négocie la rémunération des médecins spécialistes ?", choix: ["La FMSQ", "La FMOQ", "La FIQ", "Le Collège des médecins"], bonne: 0, explication: "La FMSQ représente les spécialistes ; la FMOQ, les médecins de famille.", difficile: true },
+        { q: "Que revendiquent les syndicats infirmiers avec les « ratios sécuritaires » ?", choix: ["Un nombre maximal de patients par soignant", "Un salaire minimum", "Plus de temps supplémentaire", "La fin des CHSLD"], bonne: 0, explication: "Les ratios visent la sécurité des patients et la charge de travail.", difficile: true },
+        { q: "Que désigne « attraction et rétention » ?", choix: ["Les stratégies pour recruter du personnel et le garder", "La fusion d'établissements", "Le transfert de patients", "Un mode de rémunération"], bonne: 0, explication: "C'est une priorité de toutes les politiques récentes face à la pénurie.", difficile: true }
       ]
     },
 
@@ -453,7 +479,11 @@ window.APP_DATA = {
           choix: ["Les médicaments remboursés", "Les facteurs comme le revenu, le logement et l'éducation qui influencent la santé", "Les indicateurs des urgences", "Les critères pour devenir médecin"],
           bonne: 1,
           explication: "Les déterminants de la santé sont les facteurs individuels, sociaux et environnementaux qui influencent la santé."
-        }
+        },
+        { q: "Quel milieu de vie est privé et doit obtenir une certification ?", choix: ["La RPA", "Le CHSLD public", "La Maison des aînés", "Le CLSC"], bonne: 0, explication: "Les résidences privées pour aînés sont encadrées par une certification.", difficile: true },
+        { q: "Que désigne le sigle RI-RTF ?", choix: ["Ressources intermédiaires et de type familial", "Réseau intégré de réadaptation", "Régime d'indemnisation des travailleurs", "Résidence de transition fonctionnelle"], bonne: 0, explication: "Ce sont des milieux de vie entre le domicile et l'hébergement de longue durée.", difficile: true },
+        { q: "Pourquoi les politiques favorisent-elles le soutien à domicile ?", choix: ["C'est le souhait de la majorité des aînés et c'est souvent moins coûteux", "Parce que les CHSLD sont interdits", "Pour réduire le nombre d'infirmières", "Parce que la loi l'oblige pour tous"], bonne: 0, explication: "Le maintien à domicile répond aux préférences des aînés et soulage l'hébergement.", difficile: true },
+        { q: "Combien Québec a-t-il débloqué en aide d'urgence contre l'itinérance en octobre 2026 ?", choix: ["28 M$", "2,8 M$", "280 M$", "2,8 G$"], bonne: 0, explication: "Une aide d'urgence de 28 M$ a été annoncée le 23 octobre 2026.", difficile: true }
       ]
     },
 
@@ -524,7 +554,11 @@ window.APP_DATA = {
           choix: ["Une réussite à consolider", "Un niveau de gestion inutile", "Un modèle à exporter", "Une structure à doubler"],
           bonne: 1,
           explication: "Marie-Karlynn Laflamme a dit que Santé Québec ne fait plus partie des plans et souhaite décentraliser."
-        }
+        },
+        { q: "Quelle coroner a enquêté sur les décès en CHSLD, dont ceux du CHSLD Herron ?", choix: ["Géhane Kamel", "Joanne Castonguay", "Marie Rinfret", "Geneviève Biron"], bonne: 0, explication: "Joanne Castonguay était commissaire au CSBE ; Marie Rinfret, protectrice du citoyen.", difficile: true },
+        { q: "Selon la Protectrice du citoyen, sur quoi la préparation à la pandémie était-elle centrée ?", choix: ["Sur les hôpitaux", "Sur les CHSLD", "Sur les écoles", "Sur les pharmacies"], bonne: 0, explication: "Les CHSLD ont été négligés au profit des hôpitaux.", difficile: true },
+        { q: "En entretien, comment présenter un échec du réseau ?", choix: ["Constat, causes, leçon tirée et piste d'amélioration", "En désignant un coupable politique", "En évitant le sujet", "En citant uniquement des chiffres"], bonne: 0, explication: "Une réponse nuancée et tournée vers les solutions est attendue d'un poste en politiques publiques.", difficile: true },
+        { q: "Que désigne le DSN ?", choix: ["Le Dossier santé numérique", "La Direction de la santé nationale", "Le Dépistage systématique néonatal", "Le Délai de service normalisé"], bonne: 0, explication: "Ce grand projet informatique a connu des retards.", difficile: true }
       ]
     },
 
@@ -604,7 +638,12 @@ window.APP_DATA = {
           choix: ["Un amarrage de bateau seulement", "L'alignement ou la coordination entre deux services ou politiques", "Un report de projet", "Un financement"],
           bonne: 1,
           explication: "« Assurer l'arrimage » entre deux programmes signifie les coordonner (alignment)."
-        }
+        },
+        { q: "On te demande : « Que pensez-vous de l'abolition de Santé Québec ? » Quelle approche est la meilleure ?", choix: ["Rester factuelle et parler des conditions de réussite et de l'effet sur l'usager", "Dire que c'est une erreur du gouvernement", "Refuser de répondre", "Dire qu'on n'a pas d'avis"], bonne: 0, explication: "Pour un poste public, on reste nuancée sur le politique et précise sur la mise en œuvre.", difficile: true },
+        { q: "Comment traduire « deliverable » ?", choix: ["Livrable", "Délivrance", "Livraison", "Rendu"], bonne: 0, explication: "On parle des livrables d'un projet.", difficile: true },
+        { q: "Comment traduire « timeline » dans un plan d'action ?", choix: ["Échéancier", "Ligne du temps", "Calendrier scolaire", "Délai"], bonne: 0, explication: "L'échéancier fixe les étapes et les dates.", difficile: true },
+        { q: "Comment dit-on « meeting » au Québec, en contexte professionnel ?", choix: ["Une rencontre", "Un meeting", "Une session", "Un appel"], bonne: 0, explication: "« Rencontre » est l'usage courant ; « réunion » est aussi correct.", difficile: true },
+        { q: "Quelle structure de réponse est conseillée en entretien ?", choix: ["Constat, enjeu, piste de solution, indicateur de réussite", "Opinion, puis anecdote", "Chiffres seulement", "Solution, puis conclusion"], bonne: 0, explication: "Cette structure montre une pensée claire et orientée vers les résultats.", difficile: true }
       ]
     },
 
@@ -695,7 +734,15 @@ window.APP_DATA = {
           choix: ["Tous les travailleurs", "Les 65 ans et plus, les prestataires d'aide sociale et les personnes sans assurance collective", "Seulement les enfants", "Les personnes hospitalisées"],
           bonne: 1,
           explication: "Les personnes qui ont accès à une assurance collective privée doivent y adhérer ; les autres relèvent de la RAMQ."
-        }
+        },
+        { q: "Quel ordre des étapes est correct pour un nouveau médicament au Québec ?", choix: ["Santé Canada, INESSS, APP, inscription à la Liste de la RAMQ", "INESSS, Santé Canada, RAMQ, APP", "APP, INESSS, Santé Canada, RAMQ", "RAMQ, APP, INESSS, Santé Canada"], bonne: 0, explication: "Homologation, évaluation, négociation du prix, puis inscription.", difficile: true },
+        { q: "Quel organisme fixe un prix plafond pour les médicaments brevetés ?", choix: ["Le CEPMB", "L'INESSS", "L'APP", "La RAMQ"], bonne: 0, explication: "Le Conseil d'examen du prix des médicaments brevetés fixe un plafond ; l'APP négocie le prix réel.", difficile: true },
+        { q: "Depuis quand l'assurance médicaments est-elle obligatoire au Québec ?", choix: ["1997", "1970", "2015", "2024"], bonne: 0, explication: "Le régime général d'assurance médicaments a été créé en 1997.", difficile: true },
+        { q: "Un salarié de 40 ans a accès à l'assurance collective de son employeur. Qui couvre ses médicaments ?", choix: ["L'assurance collective privée, à laquelle il doit adhérer", "La RAMQ, automatiquement", "Personne, il paie tout", "Son pharmacien"], bonne: 0, explication: "Une personne qui a accès à une assurance collective doit y adhérer ; la RAMQ couvre les autres.", difficile: true },
+        { q: "Quelle économie annuelle Québec visait-il avec la transition vers les biosimilaires ?", choix: ["Plus de 100 M$", "Environ 1 M$", "Environ 10 G$", "Aucune, c'était pour la sécurité"], bonne: 0, explication: "La politique de 2022 visait plus de 100 M$ d'économies par an.", difficile: true },
+        { q: "Selon le CEPMB (2025), combien de temps s'écoule en moyenne entre l'homologation et l'inscription publique ?", choix: ["Environ 30 mois", "Environ 3 mois", "Environ 1 an", "Environ 10 ans"], bonne: 0, explication: "Environ 906 jours en moyenne, à cause de soumissions tardives, de recommandations négatives ou de négociations échouées.", difficile: true },
+        { q: "Quel gain vise le processus accéléré de négociation en oncologie annoncé en 2025 ?", choix: ["Quatre à six mois", "Deux semaines", "Deux ans", "Aucun délai"], bonne: 0, explication: "Il s'applique à certains médicaments en oncologie, si une entente de prix est conclue.", difficile: true },
+        { q: "Quelle est la position du Québec face à l'assurance médicaments fédérale ?", choix: ["Il revendique le droit de s'en retirer avec pleine compensation", "Il l'a adoptée sans condition", "Il a aboli son propre régime", "Il n'a pas de position"], bonne: 0, explication: "Le Québec a déjà son régime hybride depuis 1997.", difficile: true }
       ]
     },
 
@@ -779,7 +826,13 @@ window.APP_DATA = {
           choix: ["À fixer les prix", "À accompagner le patient : formation, remboursement, suivi du traitement", "À inspecter les pharmacies", "À former les médecins"],
           bonne: 1,
           explication: "Les PSP, fréquents en pharmacie spécialisée, aident à l'amorce, à la couverture et à la persistance."
-        }
+        },
+        { q: "Lequel de ces actes N'EST PAS prévu par le règlement des pharmaciens de 2026 ?", choix: ["Poser un diagnostic de cancer", "Prescrire pour des problèmes de santé courants", "Administrer certains médicaments", "Substituer un médicament non couvert"], bonne: 0, explication: "Les nouveaux actes visent les problèmes courants et les maladies chroniques déjà diagnostiquées.", difficile: true },
+        { q: "Quand le règlement élargissant les actes des pharmaciens entre-t-il en vigueur ?", choix: ["Le 9 décembre 2026", "Le 1er janvier 2025", "Le 7 novembre 2024", "Le 1er juin 2026"], bonne: 0, explication: "La loi 67 a été adoptée le 7 novembre 2024 ; son règlement entre en vigueur le 9 décembre 2026.", difficile: true },
+        { q: "Familiprix est…", choix: ["Une coopérative de pharmaciens propriétaires", "Une filiale de Loblaw", "Une agence gouvernementale", "Un syndicat"], bonne: 0, explication: "Pharmaprix appartient à Loblaw ; Jean Coutu et Brunet à Metro ; Uniprix et Proxim à McKesson.", difficile: true },
+        { q: "Quels médicaments une pharmacie spécialisée gère-t-elle surtout ?", choix: ["Biologiques, injectables et thérapies coûteuses", "Vitamines et produits naturels", "Médicaments génériques courants", "Produits de beauté"], bonne: 0, explication: "Elle offre souvent un accompagnement par un programme de soutien aux patients.", difficile: true },
+        { q: "Qui représente les pharmaciens d'hôpitaux ?", choix: ["L'A.P.E.S.", "L'AQPP", "L'OPQ", "La FMSQ"], bonne: 0, explication: "L'AQPP représente les pharmaciens propriétaires ; l'OPQ est l'ordre professionnel.", difficile: true },
+        { q: "Combien de pharmaciens propriétaires l'AQPP représente-t-elle environ ?", choix: ["2 100", "210", "21 000", "500"], bonne: 0, explication: "L'entente de principe 2025-2030 annoncée en juin 2026 concerne environ 2 100 propriétaires.", difficile: true }
       ]
     },
 
@@ -872,7 +925,13 @@ window.APP_DATA = {
           choix: ["Une carte des pharmacies", "L'identification de qui décide, influence ou utilise, et de leurs attentes", "Un plan de livraison", "Un organigramme du ministère"],
           bonne: 1,
           explication: "Elle permet de prioriser les relations et d'adapter le message à chaque acteur."
-        }
+        },
+        { q: "Une bannière veut améliorer la persistance des patients sous traitement contre le cholestérol. Quelle initiative est la plus adaptée ?", choix: ["Un programme de suivi et de rappels en pharmacie, mesuré à 12 mois", "Offrir des cadeaux aux pharmaciens qui délivrent le médicament", "Une publicité télévisée du médicament", "Baisser le prix pour une semaine"], bonne: 0, explication: "L'initiative doit être axée sur le patient, conforme et mesurable.", difficile: true },
+        { q: "Laquelle de ces pratiques est clairement NON conforme ?", choix: ["Offrir un voyage à un pharmacien en échange de recommandations du produit", "Présenter des données cliniques lors d'une rencontre", "Soutenir une formation accréditée", "Partager un outil d'éducation des patients approuvé"], bonne: 0, explication: "Le code d'éthique de Médicaments novateurs Canada interdit les avantages qui influencent indûment les professionnels.", difficile: true },
+        { q: "Avec quelles équipes internes une initiative en pharmacie se construit-elle typiquement ?", choix: ["Affaires médicales, accès au marché, marketing et conformité", "Seulement les ventes", "Les ressources humaines", "La comptabilité seulement"], bonne: 0, explication: "C'est le sens de « partenaires interfonctionnels » dans l'offre.", difficile: true },
+        { q: "Pourquoi la loi 67 change-t-elle la stratégie d'un fabricant en pharmacie ?", choix: ["Le pharmacien devient prescripteur et intervient dès l'amorce du traitement", "Elle interdit les bannières", "Elle fixe le prix des médicaments", "Elle supprime l'assurance privée"], bonne: 0, explication: "Le pharmacien devient un décideur clé du parcours patient.", difficile: true },
+        { q: "Que désigne probablement la « GMBU » dans l'offre d'Amgen ?", choix: ["L'unité d'affaires de médecine générale", "Un organisme gouvernemental", "Une bannière de pharmacies", "Un syndicat de pharmaciens"], bonne: 0, explication: "General Medicine Business Unit : maladies chroniques comme le cholestérol ou l'ostéoporose.", difficile: true },
+        { q: "Quel indicateur mesure le mieux l'amorce du traitement ?", choix: ["Le délai entre l'ordonnance et la première délivrance", "Le nombre de visites en pharmacie", "Le chiffre d'affaires de la bannière", "Le nombre de courriels envoyés"], bonne: 0, explication: "Un délai court signifie que le patient commence rapidement son traitement.", difficile: true }
       ]
     }
   ],

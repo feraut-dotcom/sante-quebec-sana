@@ -275,6 +275,17 @@ main:focus, main:focus-visible { outline: none; }
 .quiz-tile.feature { grid-column: 1 / -1; background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .quiz-tile.feature span { color: color-mix(in srgb, var(--bg) 75%, transparent); }
 
+.quiz-tile.hard { border: 2px solid var(--bad); }
+.quiz-tile.hard strong { color: var(--bad); }
+.quiz-tile.errors { background: var(--bad-soft); border-color: transparent; }
+.quiz-tile.is-empty { background: transparent; border: 1px dashed var(--line); }
+.quiz-tile.is-empty strong { color: var(--muted); }
+.quiz-list.top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .quiz-list.top { grid-template-columns: 1fr; } }
+.badge-hard {
+  display: inline-block; margin-bottom: 10px; padding: 3px 10px; border-radius: 999px;
+  background: var(--bad-soft); color: var(--bad); font-weight: 700; font-size: .82rem; letter-spacing: .02em;
+}
 .qhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--muted); margin-bottom: 10px; }
 .qbar { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 26px; }
 .qbar i { display: block; height: 100%; background: var(--blue); transition: width .3s ease; }

@@ -288,49 +288,94 @@
   }
 
   // ---------- Quiz ----------
+  // Mélange les réponses pour que la bonne ne soit jamais au même endroit
+  function mix(q) {
+    var order = shuffle(q.choix.map(function (c, k) { return k; }));
+    return {
+      q: q.q, explication: q.explication, difficile: q.difficile, cle: q.cle || q.q,
+      choix: order.map(function (k) { return q.choix[k]; }),
+      bonne: order.indexOf(q.bonne)
+    };
+  }
+  function pickDistractors(t, n) {
+    var same = shuffle(D.lexique.filter(function (x) { return x.id !== t.id && x.cat === t.cat; }));
+    var other = shuffle(D.lexique.filter(function (x) { return x.id !== t.id && x.cat !== t.cat; }));
+    return same.concat(other).slice(0, n);
+  }
+  function lexQuestion(t, sens) {
+    var opts = [t].concat(pickDistractors(t, 3));
+    if (sens === "en") {
+      return { cle: "lex:" + t.id, q: "Comment dit-on « " + t.en + " » dans le réseau québécois ?",
+        choix: opts.map(function (o) { return o.terme; }), bonne: 0,
+        explication: t.terme + " : " + t.def };
+    }
+    return { cle: "lex:" + t.id, q: "Quel terme correspond à cette définition : « " + t.def + " »",
+      choix: opts.map(function (o) { return o.terme; }), bonne: 0,
+      explication: t.terme + " se dit « " + t.en + " » en anglais." };
+  }
   function lexiconQuestions(n) {
-    return shuffle(D.lexique).slice(0, n).map(function (t) {
-      var wrong = shuffle(D.lexique.filter(function (x) { return x.id !== t.id; })).slice(0, 3);
-      var opts = shuffle([t].concat(wrong));
-      return {
-        q: "Quel terme correspond à cette définition : « " + t.def + " »",
-        choix: opts.map(function (o) { return o.terme; }),
-        bonne: opts.indexOf(t),
-        explication: t.terme + " se dit « " + t.en + " » en anglais."
-      };
+    return shuffle(D.lexique).slice(0, n).map(function (t, i) {
+      return lexQuestion(t, i % 2 ? "en" : "def");
     });
   }
+  function allLessonQuestions(filter) {
+    var all = [];
+    D.lecons.forEach(function (l) { if (!filter || filter(l)) all = all.concat(l.quiz); });
+    return all;
+  }
+  function errorKeys() {
+    state.erreurs = state.erreurs || {};
+    return Object.keys(state.erreurs).filter(function (k) { return state.erreurs[k]; });
+  }
   function getQuiz(id) {
-    if (id === "lexique") return { titre: "Quiz du lexique", questions: lexiconQuestions(10) };
-    if (id === "examen") {
-      var all = [];
-      D.lecons.forEach(function (l) { all = all.concat(l.quiz); });
-      return { titre: "Examen final", questions: shuffle(all).slice(0, 15).concat(lexiconQuestions(5)) };
+    var qs, titre, lecon = null;
+    if (id === "lexique") { titre = "Quiz du lexique"; qs = lexiconQuestions(15); }
+    else if (id === "examen") { titre = "Examen final"; qs = shuffle(allLessonQuestions()).slice(0, 25).concat(lexiconQuestions(5)); }
+    else if (id === "pharma") { titre = "Examen pharmaceutique"; qs = shuffle(allLessonQuestions(function (l) { return l.volet === "pharma"; })).slice(0, 25); }
+    else if (id === "difficile") { titre = "Défi : questions difficiles"; qs = shuffle(allLessonQuestions().filter(function (q) { return q.difficile; })).slice(0, 20); }
+    else if (id === "erreurs") {
+      titre = "Revoir mes erreurs";
+      var keys = errorKeys();
+      var byKey = {};
+      allLessonQuestions().forEach(function (q) { byKey[q.q] = q; });
+      qs = keys.map(function (k) {
+        if (k.indexOf("lex:") === 0) {
+          var t = lexById[k.slice(4)];
+          return t ? lexQuestion(t, Math.random() < 0.5 ? "en" : "def") : null;
+        }
+        return byKey[k] || null;
+      }).filter(Boolean);
+      if (!qs.length) return { titre: titre, questions: [], vide: true };
+      qs = shuffle(qs).slice(0, 25);
+    } else {
+      lecon = D.lecons.find(function (x) { return x.id === id; });
+      if (!lecon) return null;
+      titre = lecon.titre; qs = shuffle(lecon.quiz);
     }
-    if (id === "pharma") {
-      var ph = [];
-      D.lecons.forEach(function (l) { if (l.volet === "pharma") ph = ph.concat(l.quiz); });
-      return { titre: "Examen pharmaceutique", questions: shuffle(ph) };
-    }
-    var l = D.lecons.find(function (x) { return x.id === id; });
-    return l ? { titre: l.titre, questions: shuffle(l.quiz), lecon: l } : null;
+    return { titre: titre, questions: qs.map(mix), lecon: lecon };
   }
 
   function viewQuizList() {
     setNav("quiz");
-    var tiles = D.lecons.map(function (l, i) {
+    var tiles = '</div><h2 class="part">Par leçon</h2><div class="quiz-list">' + D.lecons.map(function (l, i) {
       var sc = state.scores[l.id];
       return '<a class="quiz-tile" href="#quiz-' + l.id + '"><strong>' + esc(l.titre) + '</strong><span>' +
         l.quiz.length + ' questions' + (sc ? ' · meilleur score ' + sc.best + '/' + sc.total : '') + '</span></a>';
     }).join("");
-    var ex = state.scores.examen, lx = state.scores.lexique, px = state.scores.pharma;
-    var nPharma = D.lecons.reduce(function (n, l) { return n + (l.volet === "pharma" ? l.quiz.length : 0); }, 0);
+    function best(k) { var sc = state.scores[k]; return sc ? ' · meilleur score ' + sc.best + '/' + sc.total : ''; }
+    var nErr = errorKeys().length;
+    var nHard = allLessonQuestions().filter(function (q) { return q.difficile; }).length;
+    var nAll = allLessonQuestions().length;
     render(
-      '<h1>Quiz</h1><p class="lead step-sum">Chaque réponse est expliquée. Tes meilleurs scores sont gardés dans ce navigateur.</p>' +
-      '<div class="quiz-list">' +
-        '<a class="quiz-tile feature" href="#quiz-examen"><strong>Examen final</strong><span>20 questions tirées de toutes les leçons et du lexique' + (ex ? ' · meilleur score ' + ex.best + '/' + ex.total : '') + '</span></a>' +
-        '<a class="quiz-tile" href="#quiz-pharma"><strong>Examen pharmaceutique</strong><span>' + nPharma + ' questions sur le médicament et la pharmacie' + (px ? ' · meilleur score ' + px.best + '/' + px.total : '') + '</span></a>' +
-        '<a class="quiz-tile" href="#quiz-lexique"><strong>Quiz du lexique</strong><span>10 définitions à reconnaître' + (lx ? ' · meilleur score ' + lx.best + '/' + lx.total : '') + '</span></a>' +
+      '<h1>Quiz</h1><p class="lead step-sum">' + nAll + ' questions au total. Les réponses sont mélangées à chaque essai et chaque réponse est expliquée.</p>' +
+      '<div class="quiz-list top">' +
+        '<a class="quiz-tile feature" href="#quiz-examen"><strong>Examen final</strong><span>30 questions tirées de toutes les leçons et du lexique' + best("examen") + '</span></a>' +
+        '<a class="quiz-tile hard" href="#quiz-difficile"><strong>Défi : questions difficiles</strong><span>20 mises en situation et questions pièges, parmi ' + nHard + best("difficile") + '</span></a>' +
+        (nErr
+          ? '<a class="quiz-tile errors" href="#quiz-erreurs"><strong>Revoir mes erreurs</strong><span>' + nErr + ' question' + (nErr > 1 ? 's' : '') + ' ratée' + (nErr > 1 ? 's' : '') + ' à retravailler</span></a>'
+          : '<div class="quiz-tile errors is-empty"><strong>Revoir mes erreurs</strong><span>Tes questions ratées apparaîtront ici. Une bonne réponse les retire.</span></div>') +
+        '<a class="quiz-tile" href="#quiz-pharma"><strong>Examen pharmaceutique</strong><span>25 questions sur le médicament et la pharmacie' + best("pharma") + '</span></a>' +
+        '<a class="quiz-tile" href="#quiz-lexique"><strong>Quiz du lexique</strong><span>15 mots : définitions et traductions anglaises' + best("lexique") + '</span></a>' +
         tiles +
       '</div>',
       "Quiz"
@@ -341,6 +386,11 @@
     setNav("quiz");
     var quiz = getQuiz(id);
     if (!quiz) return viewQuizList();
+    if (quiz.vide) {
+      return render('<a class="crumb" href="#quiz">← Tous les quiz</a><h1>Aucune erreur à revoir</h1>' +
+        '<p class="lead step-sum">Bravo. Fais un examen ou un défi : chaque question ratée sera gardée ici.</p>' +
+        '<div class="actions"><a class="btn" href="#quiz-examen">Passer l\'examen final</a></div>', "Erreurs");
+    }
     var qs = quiz.questions;
     var i = 0, score = 0, misses = [];
 
@@ -350,6 +400,7 @@
         '<a class="crumb" href="#quiz">← Tous les quiz</a>' +
         '<div class="qhead"><strong>' + esc(quiz.titre) + '</strong><span>Question ' + (i + 1) + ' sur ' + qs.length + '</span></div>' +
         '<div class="qbar" aria-hidden="true"><i style="width:' + (i / qs.length * 100) + '%"></i></div>' +
+        (q.difficile ? '<span class="badge-hard">Difficile</span>' : '') +
         '<p class="question" id="qtext">' + esc(q.q) + '</p>' +
         '<ul class="options" role="list" aria-labelledby="qtext">' + q.choix.map(function (c, k) {
           return '<li><button type="button" class="opt" data-k="' + k + '">' + esc(c) + '</button></li>';
@@ -366,6 +417,9 @@
       var q = qs[i];
       var ok = k === q.bonne;
       if (ok) score++; else misses.push(q);
+      state.erreurs = state.erreurs || {};
+      if (ok) delete state.erreurs[q.cle]; else state.erreurs[q.cle] = true;
+      save();
       main.querySelectorAll(".opt").forEach(function (b) {
         var bk = +b.dataset.k;
         b.disabled = true;
@@ -386,7 +440,7 @@
     function drawResult() {
       var prev = state.scores[id];
       var isBest = !prev || score > prev.best;
-      state.scores[id] = { best: Math.max(score, prev ? prev.best : 0), total: qs.length };
+      if (id !== "erreurs") state.scores[id] = { best: Math.max(score, prev ? prev.best : 0), total: qs.length };
       if (quiz.lecon) state.lus[quiz.lecon.id] = true;
       save();
       var pct = score / qs.length;
@@ -398,7 +452,8 @@
         '<a class="crumb" href="#quiz">← Tous les quiz</a>' +
         '<div class="result"><h1>' + esc(quiz.titre) + '</h1>' +
         '<div class="big-score">' + score + '/' + qs.length + '</div>' +
-        '<p>' + msg + (isBest && prev ? " Nouveau meilleur score !" : "") + '</p>' +
+        '<p>' + msg + (isBest && prev && id !== "erreurs" ? " Nouveau meilleur score !" : "") + '</p>' +
+        (misses.length && id !== "erreurs" ? '<p>Les ' + misses.length + ' question' + (misses.length > 1 ? 's' : '') + ' ratée' + (misses.length > 1 ? 's sont gardées' : ' est gardée') + ' dans « Revoir mes erreurs ».</p>' : '') +
         '<div class="actions" style="justify-content:center">' +
           '<a class="btn" href="#quiz-' + id + '" id="again">Recommencer</a>' +
           (quiz.lecon ? '<a class="btn ghost" href="#lecon-' + quiz.lecon.id + '">Relire la leçon</a>' : '<a class="btn ghost" href="#lexique">Ouvrir le lexique</a>') +
