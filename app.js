@@ -42,7 +42,7 @@
   }
   function render(html, title) {
     main.innerHTML = html;
-    document.title = (title ? title + " – " : "") + "Le réseau, pour Sana";
+    document.title = (title ? title + " – " : "") + "L'application de Sana";
     window.scrollTo(0, 0);
     main.focus({ preventScroll: true });
   }
@@ -63,10 +63,11 @@
   });
 
   // ---------- Accueil ----------
-  function barcode() {
+  (function barcode() {
     var w = [3, 1, 2, 1, 4, 1, 1, 3, 2, 1, 1, 2, 4, 1, 2, 1, 3, 1, 1, 2];
-    return w.map(function (x) { return '<span style="width:' + x + 'px"></span>'; }).join("");
-  }
+    var el = document.querySelector(".band-code");
+    if (el) el.innerHTML = w.map(function (x) { return '<span style="width:' + x + 'px"></span>'; }).join("");
+  })();
   function viewHome() {
     setNav("accueil");
     var total = D.lecons.length;
@@ -82,13 +83,9 @@
     }).join("");
 
     render(
-      '<div class="band" role="img" aria-label="Bracelet d\'identification de Sana">' +
-        '<div class="band-tag" aria-hidden="true">S</div>' +
-        '<div><div class="band-id">Sana</div><div class="band-sub">Candidate en politiques de santé, Québec</div></div>' +
-        '<div class="band-code" aria-hidden="true">' + barcode() + '</div>' +
-      '</div>' +
       '<section class="hero">' +
-        '<h1>Parler du réseau comme une initiée</h1>' +
+        '<h1>L\'application de SANA</h1>' +
+        '<p class="subtitle">Pour devenir ministre de la santé au Québec</p>' +
         '<p class="lead">Huit leçons courtes sur la santé au Québec, un lexique de ' + D.lexique.length +
         ' mots-clés avec leur équivalent anglais, et des quiz pour vérifier que tout est acquis avant tes entretiens.</p>' +
         '<div class="progress-line"><span>' + lus + ' leçon' + (lus > 1 ? "s" : "") + ' sur ' + total + '</span>' +
