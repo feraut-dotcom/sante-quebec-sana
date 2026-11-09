@@ -260,11 +260,14 @@
       var t = deck[i];
       var front, back;
       if (mode === "def") {
-        front = '<span class="big">' + esc(t.terme) + '</span><span class="hint">Que veut dire ce mot ?</span>';
-        back = '<span class="big" style="font-size:1.35rem">' + esc(t.def) + '</span><span class="hint" lang="en">' + esc(t.en) + '</span>';
+        front = '<span class="big">' + esc(t.terme) + '</span><span class="en-sub" lang="en">' + esc(t.en) + '</span>' +
+          '<span class="hint">Que veut dire ce mot ?</span>';
+        back = '<span class="card-term">' + esc(t.terme) + '</span><span class="en-sub" lang="en">' + esc(t.en) + '</span>' +
+          '<span class="card-def">' + esc(t.def) + '</span>';
       } else {
         front = '<span class="big" lang="en">' + esc(t.en) + '</span><span class="hint">Comment le dit-on dans le réseau ?</span>';
-        back = '<span class="big">' + esc(t.terme) + '</span><span class="hint">' + esc(t.def) + '</span>';
+        back = '<span class="big">' + esc(t.terme) + '</span><span class="en-sub" lang="en">' + esc(t.en) + '</span>' +
+          '<span class="card-def">' + esc(t.def) + '</span>';
       }
       card.classList.remove("flipped");
       card.innerHTML = '<span class="face front">' + front + '<span class="hint">Touche pour retourner</span></span><span class="face back">' + back + '</span>';

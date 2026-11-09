@@ -257,6 +257,9 @@ main:focus, main:focus-visible { outline: none; }
 .face.back { transform: rotateY(180deg); background: var(--blue-soft); }
 .face .big { font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.15; }
 .face .hint { color: var(--muted); font-size: .9rem; }
+.face .en-sub { color: var(--muted); font-style: italic; font-size: 1.1rem; margin-top: -4px; }
+.face .card-term { font-family: var(--display); font-weight: 800; font-size: 1.3rem; }
+.face .card-def { font-size: 1.2rem; line-height: 1.45; max-width: 46ch; margin-top: 8px; }
 .card-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .count { color: var(--muted); }
 
