@@ -87,7 +87,9 @@
     var steps =
       '<h2 class="part">Le réseau de la santé</h2><ol class="path">' + stepsFor("reseau") + '</ol>' +
       '<h2 class="part">Le volet pharmaceutique</h2><p class="part-sum">Accès au remboursement, pharmacies, parties prenantes : de quoi répondre à une offre comme celle d\'Amgen.</p>' +
-      '<ol class="path">' + stepsFor("pharma") + '</ol>';
+      '<ol class="path">' + stepsFor("pharma") + '</ol>' +
+      '<a class="reading-cta" href="#lectures"><strong>Lectures en français</strong>' +
+      '<span>' + (D.lectures || []).length + ' documents officiels à lire sur le volet pharmaceutique</span></a>';
 
     render(
       '<section class="hero">' +
@@ -135,6 +137,7 @@
         '<div class="keep"><h2>À retenir</h2><ul>' + l.aRetenir.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join("") + '</ul></div>' +
         '<h2>Mots-clés de la leçon</h2><p class="step-sum">Touche un mot pour voir sa définition et sa traduction.</p>' +
         '<div class="terms">' + terms + '</div>' +
+        (l.volet === "pharma" ? '<a class="reading-cta" style="margin:0 0 24px" href="#lectures"><strong>Aller plus loin</strong><span>Lis les documents officiels en français sur ce sujet</span></a>' : '') +
         '<div class="actions">' +
           '<a class="btn" href="#quiz-' + l.id + '" data-mark="' + l.id + '">Faire le quiz de la leçon</a>' +
           (next ? '<a class="btn ghost" href="#lecon-' + next.id + '" data-mark="' + l.id + '">Leçon suivante</a>' : '<a class="btn ghost" href="#quiz-examen" data-mark="' + l.id + '">Passer l\'examen final</a>') +
@@ -144,6 +147,49 @@
     );
     main.querySelectorAll("[data-mark]").forEach(function (a) {
       a.addEventListener("click", function () { state.lus[a.dataset.mark] = true; save(); });
+    });
+  }
+
+  // ---------- Lectures ----------
+  function viewReadings() {
+    setNav("accueil");
+    state.lectures = state.lectures || {};
+    var L = D.lectures || [];
+    var groups = [];
+    L.forEach(function (r, i) {
+      var g = groups.find(function (x) { return x.nom === r.groupe; });
+      if (!g) { g = { nom: r.groupe, items: [] }; groups.push(g); }
+      g.items.push({ r: r, i: i });
+    });
+    var done = L.filter(function (r, i) { return state.lectures[i]; }).length;
+    render(
+      '<a class="crumb" href="#accueil">← Toutes les leçons</a>' +
+      '<h1>Lectures en français</h1>' +
+      '<p class="lead step-sum">' + L.length + ' documents officiels sur le volet pharmaceutique, dans un ordre de lecture conseillé. Coche ceux que tu as lus.</p>' +
+      '<div class="progress-line"><span id="read-count">' + done + ' lu' + (done > 1 ? "s" : "") + ' sur ' + L.length + '</span>' +
+      '<div class="meter" aria-hidden="true"><i id="read-meter" style="width:' + Math.round(done / L.length * 100) + '%"></i></div></div>' +
+      groups.map(function (g) {
+        return '<h2 class="part">' + esc(g.nom) + '</h2><ul class="readings">' + g.items.map(function (it) {
+          var r = it.r, id = "lu-" + it.i;
+          return '<li class="reading' + (state.lectures[it.i] ? " is-read" : "") + '">' +
+            '<input type="checkbox" id="' + id + '" data-read="' + it.i + '"' + (state.lectures[it.i] ? " checked" : "") + ' aria-label="Marquer comme lu : ' + esc(r.titre) + '">' +
+            '<div><a href="' + esc(r.url) + '" target="_blank" rel="noopener" class="reading-title">' + esc(r.titre) + '</a>' +
+            '<span class="reading-meta">' + esc(r.source) + ' · ' + esc(r.type) + '</span>' +
+            '<p>' + esc(r.pourquoi) + '</p></div></li>';
+        }).join("") + '</ul>';
+      }).join("") +
+      '<p class="note">Liens vérifiés le 9 novembre 2026. Ils s\'ouvrent dans un nouvel onglet.</p>',
+      "Lectures"
+    );
+    main.querySelectorAll("[data-read]").forEach(function (cb) {
+      cb.addEventListener("change", function () {
+        state.lectures[cb.dataset.read] = cb.checked;
+        cb.closest(".reading").classList.toggle("is-read", cb.checked);
+        save();
+        var n = L.filter(function (r, i) { return state.lectures[i]; }).length;
+        document.getElementById("read-count").textContent = n + " lu" + (n > 1 ? "s" : "") + " sur " + L.length;
+        document.getElementById("read-meter").style.width = Math.round(n / L.length * 100) + "%";
+      });
     });
   }
 
@@ -374,6 +420,7 @@
     var m;
     if ((m = h.match(/^lecon-(.+)$/))) return viewLesson(m[1]);
     if (h === "lexique") return viewLexicon();
+    if (h === "lectures") return viewReadings();
     if (h === "cartes") return viewCards();
     if ((m = h.match(/^quiz-(.+)$/))) return viewQuiz(m[1]);
     if (h === "quiz") return viewQuizList();
