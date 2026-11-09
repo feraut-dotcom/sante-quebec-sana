@@ -606,6 +606,274 @@ window.APP_DATA = {
           explication: "« Assurer l'arrimage » entre deux programmes signifie les coordonner (alignment)."
         }
       ]
+    },
+
+    {
+      id: "circuit-medicament",
+      volet: "pharma",
+      titre: "Le circuit du médicament au Québec",
+      resume: "De l'homologation à la Liste de la RAMQ : comment un médicament devient remboursé.",
+      duree: 12,
+      sections: [
+        {
+          titre: "Un parcours en plusieurs étapes",
+          texte: [
+            "Au Québec, un nouveau médicament passe par plusieurs organismes avant d'être remboursé par le régime public. Chaque étape ajoute des mois de délai : c'est pourquoi on parle d'« accès au marché » ou d'accès au remboursement.",
+            "Le Québec a une particularité au Canada : il fait sa propre évaluation, par l'INESSS, au lieu de passer par l'agence fédérale (l'Agence des médicaments du Canada, AMC)."
+          ]
+        },
+        {
+          titre: "Les étapes à connaître",
+          chronologie: [
+            ["Étape 1", "Santé Canada", "Homologue le médicament : avis de conformité, qui confirme son innocuité, son efficacité et sa qualité."],
+            ["Étape 2", "CEPMB", "Le Conseil d'examen du prix des médicaments brevetés fixe un prix plafond pour éviter les prix excessifs."],
+            ["Étape 3", "INESSS", "Évalue la valeur thérapeutique, la justesse du prix, le rapport coût-efficacité et l'impact budgétaire, puis recommande au ministre d'inscrire ou non le médicament."],
+            ["Étape 4", "Alliance pancanadienne pharmaceutique (APP)", "Négocie le prix au nom des provinces. Elle aboutit à une lettre d'intention, puis à une entente d'inscription confidentielle avec le fabricant."],
+            ["Étape 5", "Ministre et RAMQ", "Le ministre décide ; le médicament est ajouté à la Liste des médicaments de la RAMQ, mise à jour 12 fois par an depuis 2026 (contre 9 auparavant)."]
+          ]
+        },
+        {
+          titre: "Un régime d'assurance médicaments hybride",
+          puces: [
+            "Depuis 1997, toute personne au Québec doit avoir une assurance médicaments : c'est une obligation légale.",
+            "Le volet public du régime général (RGAM), géré par la RAMQ, couvre surtout les 65 ans et plus, les prestataires d'aide sociale et les personnes sans accès à une assurance collective.",
+            "Les autres sont couverts par une assurance collective privée (employeur, association), qui doit offrir au moins la même couverture que le régime public.",
+            "Les assurés paient une franchise et une coassurance, jusqu'à une contribution maximale annuelle.",
+            "Médicaments d'exception : remboursés seulement si le patient répond à des critères précis (indications reconnues).",
+            "Mesure du patient d'exception : permet, dans des cas particuliers, le remboursement d'un médicament qui n'est pas inscrit."
+          ]
+        },
+        {
+          titre: "Les dossiers d'actualité",
+          puces: [
+            "Biosimilaires : depuis le 12 avril 2022, le régime public ne rembourse, sauf exception, que la version biosimilaire d'un médicament biologique lorsqu'elle existe. Économie visée : plus de 100 M$ par an.",
+            "Accélération : en octobre 2025, Québec a rejoint un processus pancanadien accéléré de négociation pour certains médicaments en oncologie, qui vise à gagner quatre à six mois.",
+            "Maladies rares : entente Canada-Québec de plus de 305 M$ sur trois ans, signée en mars 2025.",
+            "Assurance médicaments fédérale : Ottawa a adopté sa loi en 2024 (contraceptifs, diabète). Québec, qui a déjà son propre régime, revendique le droit de s'en retirer avec pleine compensation."
+          ]
+        }
+      ],
+      aRetenir: [
+        "Santé Canada homologue, l'INESSS évalue, l'APP négocie, la RAMQ inscrit.",
+        "Le Québec évalue lui-même les médicaments par l'INESSS, contrairement aux autres provinces.",
+        "Régime hybride : public (RAMQ) ou privé (assurance collective), avec obligation d'être assuré."
+      ],
+      termes: ["acces-marche", "inesss", "app", "entente-inscription", "liste-ramq", "rgam", "med-exception", "patient-exception", "biosimilaire", "cepmb"],
+      quiz: [
+        {
+          q: "Quel organisme évalue un nouveau médicament pour le remboursement au Québec ?",
+          choix: ["L'Agence des médicaments du Canada", "L'INESSS", "Le Collège des médecins", "L'INSPQ"],
+          bonne: 1,
+          explication: "Le Québec a son propre organisme d'évaluation, l'INESSS, qui fait une recommandation au ministre."
+        },
+        {
+          q: "Quel est le rôle de l'Alliance pancanadienne pharmaceutique ?",
+          choix: ["Homologuer les médicaments", "Négocier les prix au nom des provinces", "Fixer le prix plafond des médicaments brevetés", "Inspecter les pharmacies"],
+          bonne: 1,
+          explication: "L'APP négocie les prix avec les fabricants ; le CEPMB fixe le prix plafond et Santé Canada homologue."
+        },
+        {
+          q: "Combien de mises à jour par an de la Liste des médicaments depuis 2026 ?",
+          choix: ["4", "9", "12", "24"],
+          bonne: 2,
+          explication: "Québec est passé de 9 à 12 mises à jour annuelles pour réduire les délais d'accès."
+        },
+        {
+          q: "Que prévoit la politique québécoise sur les biosimilaires (2022) ?",
+          choix: ["Interdire les biologiques", "Rembourser, sauf exception, la version biosimilaire quand elle existe", "Rembourser seulement les médicaments de marque", "Laisser chaque pharmacien choisir"],
+          bonne: 1,
+          explication: "Le régime public rembourse le biosimilaire ; les patients sur le produit de référence ont dû faire la transition."
+        },
+        {
+          q: "Qu'est-ce qu'un « médicament d'exception » ?",
+          choix: ["Un médicament retiré du marché", "Un médicament remboursé seulement si des critères précis sont respectés", "Un médicament importé", "Un médicament gratuit pour tous"],
+          bonne: 1,
+          explication: "Il est inscrit à la Liste mais son remboursement est limité à certaines indications reconnues."
+        },
+        {
+          q: "Qui le régime public d'assurance médicaments couvre-t-il principalement ?",
+          choix: ["Tous les travailleurs", "Les 65 ans et plus, les prestataires d'aide sociale et les personnes sans assurance collective", "Seulement les enfants", "Les personnes hospitalisées"],
+          bonne: 1,
+          explication: "Les personnes qui ont accès à une assurance collective privée doivent y adhérer ; les autres relèvent de la RAMQ."
+        }
+      ]
+    },
+
+    {
+      id: "pharmacie-quebec",
+      volet: "pharma",
+      titre: "La pharmacie au Québec",
+      resume: "Bannières, pharmaciens propriétaires, pharmacie spécialisée et nouveaux pouvoirs.",
+      duree: 10,
+      sections: [
+        {
+          titre: "Une profession en pleine transformation",
+          texte: [
+            "Le pharmacien québécois est devenu un acteur de la première ligne. La loi 67, adoptée en novembre 2024, et son règlement, en vigueur le 9 décembre 2026, élargissent ses actes : prescrire pour des problèmes de santé courants, administrer certains médicaments, substituer un médicament non couvert et prescrire pour des maladies chroniques déjà diagnostiquées.",
+            "Pour un fabricant, cela change tout : le pharmacien n'est plus seulement celui qui sert l'ordonnance, il participe à l'amorce et au suivi du traitement."
+          ]
+        },
+        {
+          titre: "Les trois grands canaux",
+          puces: [
+            "Pharmacie communautaire : la pharmacie de quartier. Au Québec, seuls des pharmaciens peuvent en être propriétaires ; la plupart sont affiliés à une bannière.",
+            "Pharmacie d'établissement : en hôpital ou en CHSLD, avec des pharmaciens salariés du réseau public.",
+            "Pharmacie spécialisée : gère les médicaments complexes (biologiques, injectables, thérapies coûteuses), souvent avec des programmes de soutien aux patients (PSP).",
+            "Canaux numériques : renouvellements en ligne, téléconsultation, applications d'observance, soins virtuels."
+          ]
+        },
+        {
+          titre: "Les bannières et les associations",
+          puces: [
+            "Bannières et chaînes : Jean Coutu et Brunet (Metro), Pharmaprix (Loblaw), Familiprix (coopérative de pharmaciens), Uniprix et Proxim (McKesson), entre autres.",
+            "OPQ (Ordre des pharmaciens du Québec) : protège le public et encadre la pratique.",
+            "AQPP (Association québécoise des pharmaciens propriétaires) : représente environ 2 100 propriétaires et négocie avec le gouvernement. Une entente de principe 2025-2030 a été annoncée en juin 2026.",
+            "A.P.E.S. (Association des pharmaciens des établissements de santé) : pharmaciens d'hôpitaux.",
+            "Médicaments novateurs Canada : association des fabricants de médicaments d'origine, avec un code d'éthique qui encadre les interactions avec les professionnels."
+          ]
+        },
+        {
+          titre: "Le parcours du patient en pharmacie",
+          puces: [
+            "Amorce du traitement : la première ordonnance et le démarrage du médicament.",
+            "Couverture : vérifier le remboursement (RAMQ ou assureur privé), parfois avec une demande d'autorisation.",
+            "Observance : prendre le médicament comme prescrit.",
+            "Persistance : continuer le traitement dans la durée, sans l'abandonner.",
+            "Suivi : ajustement, gestion des effets indésirables, renouvellement."
+          ]
+        }
+      ],
+      aRetenir: [
+        "Le pharmacien peut désormais prescrire et ajuster : il est un décideur clé du parcours patient.",
+        "Au Québec, une pharmacie communautaire appartient obligatoirement à des pharmaciens, souvent affiliés à une bannière.",
+        "Observance (bien prendre) et persistance (continuer) sont deux notions distinctes."
+      ],
+      termes: ["pharmacie-communautaire", "banniere", "pharmacie-specialisee", "psp", "opq", "aqpp", "observance", "persistance", "amorce"],
+      quiz: [
+        {
+          q: "Quelle loi élargit les actes des pharmaciens québécois, avec un règlement en vigueur en décembre 2026 ?",
+          choix: ["Loi 2", "Loi 15", "Loi 67", "Loi 10"],
+          bonne: 2,
+          explication: "La loi 67 (2024) modernise le système professionnel ; son règlement sur les pharmaciens entre en vigueur le 9 décembre 2026."
+        },
+        {
+          q: "Qui peut être propriétaire d'une pharmacie communautaire au Québec ?",
+          choix: ["N'importe quelle entreprise", "Seulement des pharmaciens", "Seulement l'État", "Les fabricants de médicaments"],
+          bonne: 1,
+          explication: "La loi réserve la propriété aux pharmaciens ; les grandes chaînes fonctionnent avec des pharmaciens propriétaires affiliés."
+        },
+        {
+          q: "Quelle est la différence entre observance et persistance ?",
+          choix: ["Aucune", "L'observance : prendre le médicament comme prescrit ; la persistance : le poursuivre dans la durée", "L'observance concerne le médecin, la persistance le pharmacien", "La persistance est une mesure de prix"],
+          bonne: 1,
+          explication: "Un patient peut bien suivre sa posologie (observance) mais arrêter après trois mois (faible persistance)."
+        },
+        {
+          q: "Quel organisme négocie avec le gouvernement au nom des pharmaciens propriétaires ?",
+          choix: ["L'OPQ", "L'AQPP", "La FMOQ", "La RAMQ"],
+          bonne: 1,
+          explication: "L'AQPP négocie l'entente ; l'OPQ est l'ordre professionnel qui protège le public."
+        },
+        {
+          q: "À quoi sert un programme de soutien aux patients (PSP) ?",
+          choix: ["À fixer les prix", "À accompagner le patient : formation, remboursement, suivi du traitement", "À inspecter les pharmacies", "À former les médecins"],
+          bonne: 1,
+          explication: "Les PSP, fréquents en pharmacie spécialisée, aident à l'amorce, à la couverture et à la persistance."
+        }
+      ]
+    },
+
+    {
+      id: "engagement-pharma",
+      volet: "pharma",
+      titre: "Stratégie et engagement en pharmacie",
+      resume: "Le vocabulaire d'un poste comme celui d'Amgen : comptes, parties prenantes, valeur.",
+      duree: 10,
+      sections: [
+        {
+          titre: "Ce que recherche un fabricant",
+          texte: [
+            "Un poste de stratégie pharmaceutique au Québec, comme celui proposé par Amgen, combine trois volets : planifier les comptes, gérer les relations avec les parties prenantes et créer des initiatives qui apportent de la valeur aux patients.",
+            "Amgen est un fabricant de médicaments biologiques présent notamment en santé cardiovasculaire (hypercholestérolémie) et en santé osseuse (ostéoporose). Une unité comme la « GMBU » (unité de médecine générale) vise ces maladies chroniques suivies en première ligne et en pharmacie."
+          ]
+        },
+        {
+          titre: "Volet 1 : planification des comptes",
+          puces: [
+            "Plan de comptes stratégique : document qui fixe objectifs, priorités et actions pour une bannière, une chaîne ou une association.",
+            "Segmentation et priorisation des comptes selon leur influence et leur potentiel.",
+            "Perspectives de marché : pratique en pharmacie, parcours patient, remboursement, concurrence, nouveaux modèles de soins.",
+            "Recommandations concrètes pour les équipes interfonctionnelles (marketing, accès au marché, affaires médicales)."
+          ]
+        },
+        {
+          titre: "Volet 2 : relations avec les parties prenantes",
+          puces: [
+            "Cartographie des parties prenantes : qui décide, qui influence, qui utilise.",
+            "Interlocuteurs : propriétaires, pharmaciens, leaders de bannières, pharmacies spécialisées, associations (AQPP, OPQ), intervenants en soins virtuels.",
+            "Être la personne-ressource principale des comptes clés.",
+            "Représenter l'entreprise dans les rencontres, conférences et forums du secteur.",
+            "Agir de manière conforme : respect du code d'éthique de Médicaments novateurs Canada et de l'interdiction de faire de la publicité directe au public pour les médicaments sur ordonnance."
+          ]
+        },
+        {
+          titre: "Volet 3 : initiatives axées sur le patient",
+          puces: [
+            "Co-créer avec les pharmacies des projets d'éducation des patients, d'accès, d'amorce, d'observance et de persistance.",
+            "Exemples : outils de suivi après un infarctus, dépistage de l'ostéoporose après une fracture, rappels de renouvellement.",
+            "Mesurer l'impact avec des indicateurs : taux de persistance à 12 mois, délai d'amorce, nombre de patients accompagnés.",
+            "Approche axée sur la valeur : bénéfice pour le patient, le pharmacien et le système, pas seulement pour les ventes."
+          ]
+        },
+        {
+          titre: "Formulations utiles en entretien",
+          puces: [
+            "« Avec la loi 67, le pharmacien devient un prescripteur : il faut l'intégrer dès l'amorce du traitement. »",
+            "« Je bâtirais un plan de comptes par bannière, aligné sur les priorités de l'unité et sur les besoins des patients. »",
+            "« La persistance est un enjeu majeur en maladies chroniques : c'est là qu'une initiative en pharmacie crée le plus de valeur. »",
+            "« Toute collaboration doit être conforme et axée sur la valeur pour le patient et le système. »",
+            "« Je traduirais les données de marché en recommandations concrètes pour les équipes interfonctionnelles. »"
+          ]
+        }
+      ],
+      aRetenir: [
+        "Trois volets : plans de comptes, parties prenantes, initiatives axées sur le patient.",
+        "Les mots-clés : bannière, amorce, observance, persistance, conformité, valeur, interfonctionnel.",
+        "Relier chaque initiative à un indicateur mesurable et à un bénéfice pour le patient."
+      ],
+      termes: ["plan-comptes", "cartographie", "interfonctionnel", "conformite", "valeur", "soins-virtuels", "perspectives-marche", "parcours-patient"],
+      quiz: [
+        {
+          q: "Qu'est-ce qu'un plan de comptes stratégique ?",
+          choix: ["Un relevé bancaire", "Un document qui fixe objectifs et actions pour un client clé comme une bannière", "Un budget gouvernemental", "Une liste de médicaments"],
+          bonne: 1,
+          explication: "Le plan de comptes (strategic account plan) organise la relation avec un compte prioritaire."
+        },
+        {
+          q: "Que veut dire « interfonctionnel » ?",
+          choix: ["Qui ne fonctionne pas", "Qui implique plusieurs services de l'entreprise (marketing, médical, accès)", "Qui concerne plusieurs pays", "Qui est automatisé"],
+          bonne: 1,
+          explication: "Une équipe interfonctionnelle (cross-functional) réunit plusieurs fonctions autour d'un même objectif."
+        },
+        {
+          q: "Au Canada, un fabricant peut-il faire de la publicité directe au public pour un médicament sur ordonnance ?",
+          choix: ["Oui, sans limite", "Non, c'est interdit", "Seulement à la télévision", "Seulement au Québec"],
+          bonne: 1,
+          explication: "La publicité directe au consommateur pour les médicaments d'ordonnance est interdite au Canada ; d'où l'importance de la conformité."
+        },
+        {
+          q: "Quel indicateur mesure le mieux l'impact d'une initiative sur la persistance ?",
+          choix: ["Le nombre de visites sur un site web", "Le taux de patients toujours sous traitement après 12 mois", "Le nombre de pharmacies visitées", "Le prix du médicament"],
+          bonne: 1,
+          explication: "La persistance se mesure dans la durée, par exemple la proportion de patients encore traités à 12 mois."
+        },
+        {
+          q: "Qu'est-ce que la cartographie des parties prenantes ?",
+          choix: ["Une carte des pharmacies", "L'identification de qui décide, influence ou utilise, et de leurs attentes", "Un plan de livraison", "Un organigramme du ministère"],
+          bonne: 1,
+          explication: "Elle permet de prioriser les relations et d'adapter le message à chaque acteur."
+        }
+      ]
     }
   ],
 
@@ -689,6 +957,48 @@ window.APP_DATA = {
     { id: "livrable", terme: "Livrable", def: "Produit attendu à une étape d'un projet.", en: "Deliverable", cat: "Langue professionnelle" },
     { id: "cible", terme: "Cible", def: "Objectif chiffré à atteindre.", en: "Target", cat: "Langue professionnelle" },
     { id: "cadre-reference", terme: "Cadre de référence", def: "Document qui précise comment appliquer une politique ou un programme.", en: "Reference framework / guidelines", cat: "Langue professionnelle" },
-    { id: "plan-action", terme: "Plan d'action", def: "Document qui détaille mesures, responsables et échéances d'une politique.", en: "Action plan", cat: "Langue professionnelle" }
+    { id: "plan-action", terme: "Plan d'action", def: "Document qui détaille mesures, responsables et échéances d'une politique.", en: "Action plan", cat: "Langue professionnelle" },
+
+    // Pharmacie et médicament
+    { id: "acces-marche", terme: "Accès au marché", def: "Ensemble des démarches pour qu'un médicament soit évalué, négocié et remboursé.", en: "Market access", cat: "Pharmacie et médicament" },
+    { id: "app", terme: "APP", def: "Alliance pancanadienne pharmaceutique : négocie les prix des médicaments au nom des provinces.", en: "pan-Canadian Pharmaceutical Alliance (pCPA)", cat: "Pharmacie et médicament" },
+    { id: "cepmb", terme: "CEPMB", def: "Conseil d'examen du prix des médicaments brevetés : fixe un prix plafond.", en: "Patented Medicine Prices Review Board (PMPRB)", cat: "Pharmacie et médicament" },
+    { id: "avis-conformite", terme: "Avis de conformité", def: "Autorisation de mise en marché d'un médicament par Santé Canada.", en: "Notice of Compliance (NOC)", cat: "Pharmacie et médicament" },
+    { id: "entente-inscription", terme: "Entente d'inscription", def: "Accord confidentiel entre le ministre et le fabricant (prix, rabais) qui permet l'inscription d'un médicament.", en: "Product listing agreement", cat: "Pharmacie et médicament" },
+    { id: "liste-ramq", terme: "Liste des médicaments", def: "Liste des médicaments remboursés par le régime public, publiée par la RAMQ.", en: "Public drug formulary", cat: "Pharmacie et médicament" },
+    { id: "rgam", terme: "RGAM", def: "Régime général d'assurance médicaments : volet public (RAMQ) et privé (assurances collectives).", en: "Quebec general prescription drug insurance plan", cat: "Pharmacie et médicament" },
+    { id: "assurance-collective", terme: "Assurance collective", def: "Assurance de groupe offerte par un employeur ou une association, qui doit couvrir les médicaments.", en: "Group insurance / private drug plan", cat: "Pharmacie et médicament" },
+    { id: "franchise", terme: "Franchise et coassurance", def: "Parts du coût des médicaments payées par l'assuré, jusqu'à une contribution maximale.", en: "Deductible and coinsurance", cat: "Pharmacie et médicament" },
+    { id: "med-exception", terme: "Médicament d'exception", def: "Médicament remboursé seulement pour des indications reconnues et sur critères.", en: "Exception drug (special authorization)", cat: "Pharmacie et médicament" },
+    { id: "patient-exception", terme: "Mesure du patient d'exception", def: "Permet, dans des cas particuliers, le remboursement d'un médicament non inscrit.", en: "Exceptional patient measure", cat: "Pharmacie et médicament" },
+    { id: "biologique", terme: "Médicament biologique", def: "Médicament produit à partir d'organismes vivants, souvent injectable et coûteux.", en: "Biologic drug", cat: "Pharmacie et médicament" },
+    { id: "biosimilaire", terme: "Biosimilaire", def: "Version très similaire d'un biologique déjà autorisé, moins chère ; favorisée par Québec depuis 2022.", en: "Biosimilar", cat: "Pharmacie et médicament" },
+    { id: "generique", terme: "Médicament générique", def: "Copie d'un médicament chimique dont le brevet a expiré.", en: "Generic drug", cat: "Pharmacie et médicament" },
+    { id: "medicament-origine", terme: "Médicament d'origine", def: "Médicament innovant de la compagnie qui l'a découvert (dit « de marque »).", en: "Brand-name / innovative drug", cat: "Pharmacie et médicament" },
+    { id: "pharmacie-communautaire", terme: "Pharmacie communautaire", def: "Pharmacie de quartier ouverte au public, détenue par des pharmaciens.", en: "Community pharmacy", cat: "Pharmacie et médicament" },
+    { id: "pharmacie-etablissement", terme: "Pharmacie d'établissement", def: "Pharmacie d'un hôpital ou d'un CHSLD.", en: "Hospital pharmacy", cat: "Pharmacie et médicament" },
+    { id: "pharmacie-specialisee", terme: "Pharmacie spécialisée", def: "Pharmacie qui gère les médicaments complexes : biologiques, injectables, thérapies coûteuses.", en: "Specialty pharmacy", cat: "Pharmacie et médicament" },
+    { id: "banniere", terme: "Bannière", def: "Enseigne qui regroupe des pharmacies indépendantes sous une même marque et des services communs.", en: "Pharmacy banner", cat: "Pharmacie et médicament" },
+    { id: "pharmacien-proprietaire", terme: "Pharmacien propriétaire", def: "Pharmacien qui possède sa pharmacie ; seul autorisé à en être propriétaire au Québec.", en: "Pharmacist owner", cat: "Pharmacie et médicament" },
+    { id: "opq", terme: "OPQ", def: "Ordre des pharmaciens du Québec : protège le public et encadre la pratique.", en: "Quebec Order of Pharmacists", cat: "Pharmacie et médicament" },
+    { id: "aqpp", terme: "AQPP", def: "Association québécoise des pharmaciens propriétaires : négocie avec le gouvernement.", en: "Quebec association of pharmacist owners", cat: "Pharmacie et médicament" },
+    { id: "apes", terme: "A.P.E.S.", def: "Association des pharmaciens des établissements de santé du Québec.", en: "Association of hospital pharmacists", cat: "Pharmacie et médicament" },
+    { id: "psp", terme: "PSP", def: "Programme de soutien aux patients : formation, aide au remboursement, suivi.", en: "Patient support program", cat: "Pharmacie et médicament" },
+    { id: "amorce", terme: "Amorce du traitement", def: "Démarrage d'un traitement : première ordonnance et premières prises.", en: "Treatment initiation", cat: "Pharmacie et médicament" },
+    { id: "observance", terme: "Observance", def: "Fait de prendre son médicament comme prescrit (dose, moment).", en: "Adherence / compliance", cat: "Pharmacie et médicament" },
+    { id: "persistance", terme: "Persistance", def: "Fait de poursuivre son traitement dans la durée sans l'abandonner.", en: "Persistence", cat: "Pharmacie et médicament" },
+    { id: "parcours-patient", terme: "Parcours patient", def: "Étapes vécues par le patient, du diagnostic au suivi du traitement.", en: "Patient journey", cat: "Pharmacie et médicament" },
+    { id: "soins-virtuels", terme: "Soins virtuels", def: "Soins offerts à distance : téléconsultation, suivi numérique.", en: "Virtual care", cat: "Pharmacie et médicament" },
+    { id: "ordonnance", terme: "Ordonnance", def: "Prescription écrite d'un médicament par un professionnel autorisé.", en: "Prescription", cat: "Pharmacie et médicament" },
+    { id: "posologie", terme: "Posologie", def: "Dose et fréquence de prise d'un médicament.", en: "Dosage regimen", cat: "Pharmacie et médicament" },
+    { id: "effet-indesirable", terme: "Effet indésirable", def: "Réaction non souhaitée à un médicament.", en: "Adverse effect", cat: "Pharmacie et médicament" },
+    { id: "plan-comptes", terme: "Plan de comptes stratégique", def: "Document qui fixe objectifs, priorités et actions pour un client clé.", en: "Strategic account plan", cat: "Pharmacie et médicament" },
+    { id: "cartographie", terme: "Cartographie des parties prenantes", def: "Identification de qui décide, influence ou utilise, et de leurs attentes.", en: "Stakeholder mapping", cat: "Pharmacie et médicament" },
+    { id: "interfonctionnel", terme: "Interfonctionnel", def: "Qui implique plusieurs services d'une entreprise (marketing, médical, accès).", en: "Cross-functional", cat: "Pharmacie et médicament" },
+    { id: "perspectives-marche", terme: "Perspectives de marché", def: "Analyses et constats tirés des données du marché.", en: "Market insights", cat: "Pharmacie et médicament" },
+    { id: "conformite", terme: "Conformité", def: "Respect des lois, règlements et codes d'éthique de l'industrie.", en: "Compliance", cat: "Pharmacie et médicament" },
+    { id: "valeur", terme: "Axé sur la valeur", def: "Qui vise un bénéfice réel pour le patient et le système de santé.", en: "Value-based", cat: "Pharmacie et médicament" },
+    { id: "personne-ressource", terme: "Personne-ressource", def: "Interlocuteur principal pour un dossier ou un client.", en: "Main point of contact", cat: "Pharmacie et médicament" },
+    { id: "mnc", terme: "Médicaments novateurs Canada", def: "Association des fabricants de médicaments d'origine, dotée d'un code d'éthique.", en: "Innovative Medicines Canada", cat: "Pharmacie et médicament" }
   ]
 };

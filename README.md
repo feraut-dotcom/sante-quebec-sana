@@ -1,6 +1,6 @@
 # Le réseau, pour Sana
 
-Petite app d'apprentissage sur le réseau de la santé et des services sociaux du Québec : 8 leçons, un lexique de 68 mots-clés (avec équivalents anglais), des cartes mémoire et des quiz.
+Petite app d'apprentissage sur le réseau de la santé et des services sociaux du Québec : 11 leçons (dont un volet pharmaceutique), un lexique de 108 mots-clés (avec équivalents anglais), des cartes mémoire et des quiz.
 
 Site 100 % statique (HTML, CSS, JavaScript), sans installation ni compilation.
 

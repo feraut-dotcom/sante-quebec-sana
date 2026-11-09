@@ -140,6 +140,8 @@ main:focus, main:focus-visible { outline: none; }
 .meter > i { display: block; height: 100%; background: var(--good); border-radius: 999px; transition: width .4s ease; }
 
 /* Parcours des leçons */
+.part { font-size: 1.35rem; margin: 40px 0 0; padding-top: 18px; border-top: 2px solid var(--line); }
+.part-sum { color: var(--muted); margin: 6px 0 0; max-width: 62ch; }
 .path { list-style: none; padding: 0; margin: 28px 0 0; position: relative; }
 .path::before { content: ""; position: absolute; left: 21px; top: 24px; bottom: 24px; width: 2px; background: var(--line); }
 .path li { position: relative; }

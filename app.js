@@ -72,26 +72,33 @@
     setNav("accueil");
     var total = D.lecons.length;
     var lus = D.lecons.filter(function (l) { return state.lus[l.id]; }).length;
-    var steps = D.lecons.map(function (l, i) {
-      var sc = state.scores[l.id];
-      return '<li><a class="step' + (state.lus[l.id] ? " done" : "") + '" href="#lecon-' + l.id + '">' +
-        '<span class="step-num">' + (state.lus[l.id] ? "✓" : (i + 1)) + '</span>' +
-        '<span><span class="step-title">' + esc(l.titre) + '</span><span class="step-sum">' + esc(l.resume) + '</span></span>' +
-        '<span class="step-meta">' + l.duree + ' min' +
-        (sc ? '<br><span class="score-chip">Quiz ' + sc.best + '/' + sc.total + '</span>' : "") +
-        '</span></a></li>';
-    }).join("");
+    function stepsFor(volet) {
+      return D.lecons.map(function (l, i) {
+        if ((l.volet || "reseau") !== volet) return "";
+        var sc = state.scores[l.id];
+        return '<li><a class="step' + (state.lus[l.id] ? " done" : "") + '" href="#lecon-' + l.id + '">' +
+          '<span class="step-num">' + (state.lus[l.id] ? "✓" : (i + 1)) + '</span>' +
+          '<span><span class="step-title">' + esc(l.titre) + '</span><span class="step-sum">' + esc(l.resume) + '</span></span>' +
+          '<span class="step-meta">' + l.duree + ' min' +
+          (sc ? '<br><span class="score-chip">Quiz ' + sc.best + '/' + sc.total + '</span>' : "") +
+          '</span></a></li>';
+      }).join("");
+    }
+    var steps =
+      '<h2 class="part">Le réseau de la santé</h2><ol class="path">' + stepsFor("reseau") + '</ol>' +
+      '<h2 class="part">Le volet pharmaceutique</h2><p class="part-sum">Accès au remboursement, pharmacies, parties prenantes : de quoi répondre à une offre comme celle d\'Amgen.</p>' +
+      '<ol class="path">' + stepsFor("pharma") + '</ol>';
 
     render(
       '<section class="hero">' +
         '<h1>L\'application de SANA</h1>' +
         '<p class="subtitle">Pour devenir ministre de la santé au Québec</p>' +
-        '<p class="lead">Huit leçons courtes sur la santé au Québec, un lexique de ' + D.lexique.length +
+        '<p class="lead">' + total + ' leçons courtes sur la santé et le médicament au Québec, un lexique de ' + D.lexique.length +
         ' mots-clés avec leur équivalent anglais, et des quiz pour vérifier que tout est acquis avant tes entretiens.</p>' +
         '<div class="progress-line"><span>' + lus + ' leçon' + (lus > 1 ? "s" : "") + ' sur ' + total + '</span>' +
         '<div class="meter" aria-hidden="true"><i style="width:' + Math.round(lus / total * 100) + '%"></i></div></div>' +
       '</section>' +
-      '<ol class="path">' + steps + '</ol>' +
+      steps +
       '<p class="note">Contenu à jour au ' + esc(D.miseAJour) + '. Ta progression reste dans ce navigateur.</p>',
       ""
     );
@@ -251,6 +258,11 @@
       D.lecons.forEach(function (l) { all = all.concat(l.quiz); });
       return { titre: "Examen final", questions: shuffle(all).slice(0, 15).concat(lexiconQuestions(5)) };
     }
+    if (id === "pharma") {
+      var ph = [];
+      D.lecons.forEach(function (l) { if (l.volet === "pharma") ph = ph.concat(l.quiz); });
+      return { titre: "Examen pharmaceutique", questions: shuffle(ph) };
+    }
     var l = D.lecons.find(function (x) { return x.id === id; });
     return l ? { titre: l.titre, questions: shuffle(l.quiz), lecon: l } : null;
   }
@@ -262,11 +274,13 @@
       return '<a class="quiz-tile" href="#quiz-' + l.id + '"><strong>' + esc(l.titre) + '</strong><span>' +
         l.quiz.length + ' questions' + (sc ? ' · meilleur score ' + sc.best + '/' + sc.total : '') + '</span></a>';
     }).join("");
-    var ex = state.scores.examen, lx = state.scores.lexique;
+    var ex = state.scores.examen, lx = state.scores.lexique, px = state.scores.pharma;
+    var nPharma = D.lecons.reduce(function (n, l) { return n + (l.volet === "pharma" ? l.quiz.length : 0); }, 0);
     render(
       '<h1>Quiz</h1><p class="lead step-sum">Chaque réponse est expliquée. Tes meilleurs scores sont gardés dans ce navigateur.</p>' +
       '<div class="quiz-list">' +
         '<a class="quiz-tile feature" href="#quiz-examen"><strong>Examen final</strong><span>20 questions tirées de toutes les leçons et du lexique' + (ex ? ' · meilleur score ' + ex.best + '/' + ex.total : '') + '</span></a>' +
+        '<a class="quiz-tile" href="#quiz-pharma"><strong>Examen pharmaceutique</strong><span>' + nPharma + ' questions sur le médicament et la pharmacie' + (px ? ' · meilleur score ' + px.best + '/' + px.total : '') + '</span></a>' +
         '<a class="quiz-tile" href="#quiz-lexique"><strong>Quiz du lexique</strong><span>10 définitions à reconnaître' + (lx ? ' · meilleur score ' + lx.best + '/' + lx.total : '') + '</span></a>' +
         tiles +
       '</div>',
