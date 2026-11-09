@@ -40,6 +40,34 @@
       else a.removeAttribute("aria-current");
     });
   }
+  // ---------- Signalétique : un espace = une lettre, une couleur, un pictogramme ----------
+  var SPACES = {
+    reseau:   { lettre: "A", nom: "Le réseau de la santé" },
+    pharma:   { lettre: "B", nom: "Le volet pharmaceutique" },
+    lexique:  { lettre: "C", nom: "Lexique" },
+    cartes:   { lettre: "D", nom: "Cartes mémoire" },
+    quiz:     { lettre: "E", nom: "Quiz" },
+    lectures: { lettre: "F", nom: "Lectures en français" }
+  };
+  var ICONS = {
+    reseau: '<path d="M7 4v16M17 4v16M7 12h10"/>',
+    pharma: '<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>',
+    lexique: '<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3zM21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>',
+    cartes: '<rect x="3" y="7" width="12" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/>',
+    quiz: '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',
+    lectures: '<path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7"/>'
+  };
+  function icon(zone) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[zone] + '</svg>';
+  }
+  function sign(zone, title, sub, meta, tag) {
+    tag = tag || "h1";
+    return '<header class="sign' + (tag === "h2" ? " section" : "") + '" data-zone="' + zone + '">' +
+      '<span class="sign-mark" aria-hidden="true"><span class="sign-letter">' + SPACES[zone].lettre + '</span><span class="sign-icon">' + icon(zone) + '</span></span>' +
+      '<div class="sign-text">' + (meta ? '<span class="sign-meta">' + meta + '</span>' : '') +
+      '<' + tag + '>' + esc(title) + '</' + tag + '>' + (sub ? '<p>' + sub + '</p>' : '') + '</div></header>';
+  }
+  function setZone(zone) { document.body.setAttribute("data-zone", zone); }
   function render(html, title) {
     main.innerHTML = html;
     document.title = (title ? title + " – " : "") + "L'application de Sana";
@@ -72,6 +100,7 @@
     setNav("accueil");
     var total = D.lecons.length;
     var lus = D.lecons.filter(function (l) { return state.lus[l.id]; }).length;
+    setZone("reseau");
     function stepsFor(volet) {
       return D.lecons.map(function (l, i) {
         if ((l.volet || "reseau") !== volet) return "";
@@ -84,12 +113,28 @@
           '</span></a></li>';
       }).join("");
     }
+    var nRes = D.lecons.filter(function (l) { return (l.volet || "reseau") === "reseau"; }).length;
+    var nPh = total - nRes;
+    var nQ = D.lecons.reduce(function (n, l) { return n + l.quiz.length; }, 0);
+    var dir = [
+      ["reseau", "#lecon-" + D.lecons[0].id, "Leçons sur le réseau", nRes + " leçons"],
+      ["pharma", "#lecon-circuit-medicament", "Volet pharmaceutique", nPh + " leçons"],
+      ["lexique", "#lexique", "Lexique", D.lexique.length + " mots"],
+      ["cartes", "#cartes", "Cartes mémoire", "Français et anglais"],
+      ["quiz", "#quiz", "Quiz", nQ + " questions"],
+      ["lectures", "#lectures", "Lectures", (D.lectures || []).length + " documents"]
+    ];
+    var directory = '<nav class="directory" aria-label="Répertoire des espaces"><h2>Répertoire</h2><ul class="dir-grid">' + dir.map(function (d) {
+      return '<li class="dir-item" data-zone="' + d[0] + '"><a href="' + d[1] + '"><span class="dir-letter" aria-hidden="true">' + SPACES[d[0]].lettre + '</span>' +
+        '<span><span class="dir-name">' + esc(d[2]) + '</span><span class="dir-sub">' + esc(d[3]) + '</span></span></a></li>';
+    }).join("") + '</ul></nav>';
     var steps =
-      '<h2 class="part">Le réseau de la santé</h2><ol class="path">' + stepsFor("reseau") + '</ol>' +
-      '<h2 class="part">Le volet pharmaceutique</h2><p class="part-sum">Accès au remboursement, pharmacies, parties prenantes : de quoi répondre à une offre comme celle d\'Amgen.</p>' +
-      '<ol class="path">' + stepsFor("pharma") + '</ol>' +
-      '<a class="reading-cta" href="#lectures"><strong>Lectures en français</strong>' +
-      '<span>' + (D.lectures || []).length + ' documents officiels à lire sur le volet pharmaceutique</span></a>';
+      '<section data-zone="reseau">' + sign("reseau", "Le réseau de la santé", null, null, "h2") +
+      '<ol class="path">' + stepsFor("reseau") + '</ol></section>' +
+      '<section data-zone="pharma">' + sign("pharma", "Le volet pharmaceutique", "Accès au remboursement, pharmacies, parties prenantes : de quoi répondre à une offre comme celle d\'Amgen.", null, "h2") +
+      '<ol class="path">' + stepsFor("pharma") + '</ol></section>' +
+      '<div data-zone="lectures"><a class="reading-cta" href="#lectures"><strong>F · Lectures en français</strong>' +
+      '<span>' + (D.lectures || []).length + ' documents officiels à lire sur le volet pharmaceutique</span></a></div>';
 
     render(
       '<section class="hero">' +
@@ -100,6 +145,7 @@
         '<div class="progress-line"><span>' + lus + ' leçon' + (lus > 1 ? "s" : "") + ' sur ' + total + '</span>' +
         '<div class="meter" aria-hidden="true"><i style="width:' + Math.round(lus / total * 100) + '%"></i></div></div>' +
       '</section>' +
+      directory +
       steps +
       '<p class="note">Contenu à jour au ' + esc(D.miseAJour) + '. Ta progression reste dans ce navigateur.</p>',
       ""
@@ -113,6 +159,8 @@
     if (idx < 0) return viewHome();
     var l = D.lecons[idx];
     var next = D.lecons[idx + 1];
+    var zone = l.volet === "pharma" ? "pharma" : "reseau";
+    setZone(zone);
 
     var body = l.sections.map(function (s) {
       var h = '<section><h2>' + esc(s.titre) + '</h2>';
@@ -131,15 +179,14 @@
     render(
       '<a class="crumb" href="#accueil">← Toutes les leçons</a>' +
       '<article class="lesson">' +
-        '<header class="lesson-head"><p class="step-sum">Leçon ' + (idx + 1) + ' sur ' + D.lecons.length + ' · ' + l.duree + ' min</p>' +
-        '<h1>' + esc(l.titre) + '</h1><p class="lead">' + esc(l.resume) + '</p></header>' +
+        sign(zone, l.titre, esc(l.resume), esc(SPACES[zone].nom) + ' · leçon ' + (idx + 1) + ' sur ' + D.lecons.length + ' · ' + l.duree + ' min') +
         body +
         '<div class="keep"><h2>À retenir</h2><ul>' + l.aRetenir.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join("") + '</ul></div>' +
         '<h2>Mots-clés de la leçon</h2><p class="step-sum">Touche un mot pour voir sa définition et sa traduction.</p>' +
         '<div class="terms">' + terms + '</div>' +
-        (l.volet === "pharma" ? '<a class="reading-cta" style="margin:0 0 24px" href="#lectures"><strong>Aller plus loin</strong><span>Lis les documents officiels en français sur ce sujet</span></a>' : '') +
+        (l.volet === "pharma" ? '<a class="reading-cta" data-zone="lectures" style="margin:0 0 24px" href="#lectures"><strong>Aller plus loin</strong><span>Lis les documents officiels en français sur ce sujet</span></a>' : '') +
         '<div class="actions">' +
-          '<a class="btn" href="#quiz-' + l.id + '" data-mark="' + l.id + '">Faire le quiz de la leçon</a>' +
+          '<a class="btn" data-zone="quiz" href="#quiz-' + l.id + '" data-mark="' + l.id + '">Faire le quiz de la leçon</a>' +
           (next ? '<a class="btn ghost" href="#lecon-' + next.id + '" data-mark="' + l.id + '">Leçon suivante</a>' : '<a class="btn ghost" href="#quiz-examen" data-mark="' + l.id + '">Passer l\'examen final</a>') +
         '</div>' +
       '</article>',
@@ -153,6 +200,7 @@
   // ---------- Lectures ----------
   function viewReadings() {
     setNav("accueil");
+    setZone("lectures");
     state.lectures = state.lectures || {};
     var L = D.lectures || [];
     var groups = [];
@@ -164,8 +212,7 @@
     var done = L.filter(function (r, i) { return state.lectures[i]; }).length;
     render(
       '<a class="crumb" href="#accueil">← Toutes les leçons</a>' +
-      '<h1>Lectures en français</h1>' +
-      '<p class="lead step-sum">' + L.length + ' documents officiels sur le volet pharmaceutique, dans un ordre de lecture conseillé. Coche ceux que tu as lus.</p>' +
+      sign("lectures", "Lectures en français", L.length + ' documents officiels sur le volet pharmaceutique, dans un ordre de lecture conseillé. Coche ceux que tu as lus.') +
       '<div class="progress-line"><span id="read-count">' + done + ' lu' + (done > 1 ? "s" : "") + ' sur ' + L.length + '</span>' +
       '<div class="meter" aria-hidden="true"><i id="read-meter" style="width:' + Math.round(done / L.length * 100) + '%"></i></div></div>' +
       groups.map(function (g) {
@@ -197,9 +244,10 @@
   var lexFilter = { q: "", cat: "Tous" };
   function viewLexicon() {
     setNav("lexique");
+    setZone("lexique");
     var cats = ["Tous"].concat(D.lexique.reduce(function (acc, t) { if (acc.indexOf(t.cat) < 0) acc.push(t.cat); return acc; }, []));
     render(
-      '<h1>Lexique</h1><p class="lead step-sum">' + D.lexique.length + ' mots et sigles du réseau, avec leur équivalent anglais.</p>' +
+      sign("lexique", "Lexique", D.lexique.length + ' mots et sigles du réseau et du médicament, avec leur équivalent anglais.') +
       '<div class="toolbar">' +
         '<input class="search" type="search" id="lex-q" placeholder="Chercher un mot, un sigle ou un terme anglais" aria-label="Chercher dans le lexique" value="' + esc(lexFilter.q) + '">' +
         '<div class="chips" role="group" aria-label="Catégories">' + cats.map(function (c) {
@@ -240,11 +288,12 @@
   // ---------- Cartes mémoire ----------
   function viewCards() {
     setNav("cartes");
+    setZone("cartes");
     var mode = "def"; // "def" : terme -> définition ; "en" : anglais -> français
     var deck = shuffle(D.lexique);
     var i = 0;
     render(
-      '<h1>Cartes mémoire</h1><p class="lead step-sum">Lis le recto, essaie de répondre à voix haute, puis retourne la carte.</p>' +
+      sign("cartes", "Cartes mémoire", 'Lis le recto, essaie de répondre à voix haute, puis retourne la carte.') +
       '<div class="chips" role="group" aria-label="Sens des cartes">' +
         '<button type="button" class="chip" data-mode="def" aria-pressed="true">Mot → définition</button>' +
         '<button type="button" class="chip" data-mode="en" aria-pressed="false">Anglais → français</button>' +
@@ -357,25 +406,27 @@
 
   function viewQuizList() {
     setNav("quiz");
+    setZone("quiz");
     var tiles = '</div><h2 class="part">Par leçon</h2><div class="quiz-list">' + D.lecons.map(function (l, i) {
       var sc = state.scores[l.id];
-      return '<a class="quiz-tile" href="#quiz-' + l.id + '"><strong>' + esc(l.titre) + '</strong><span>' +
-        l.quiz.length + ' questions' + (sc ? ' · meilleur score ' + sc.best + '/' + sc.total : '') + '</span></a>';
+      var z = l.volet === "pharma" ? "pharma" : "reseau";
+      return '<a class="quiz-tile lesson" data-zone="' + z + '" href="#quiz-' + l.id + '"><span class="dir-letter" aria-hidden="true">' + SPACES[z].lettre + '</span><span><strong>' + esc(l.titre) + '</strong><span>' +
+        l.quiz.length + ' questions' + (sc ? ' · meilleur score ' + sc.best + '/' + sc.total : '') + '</span></span></a>';
     }).join("");
     function best(k) { var sc = state.scores[k]; return sc ? ' · meilleur score ' + sc.best + '/' + sc.total : ''; }
     var nErr = errorKeys().length;
     var nHard = allLessonQuestions().filter(function (q) { return q.difficile; }).length;
     var nAll = allLessonQuestions().length;
     render(
-      '<h1>Quiz</h1><p class="lead step-sum">' + nAll + ' questions au total. Les réponses sont mélangées à chaque essai et chaque réponse est expliquée.</p>' +
+      sign("quiz", "Quiz", nAll + ' questions au total. Les réponses sont mélangées à chaque essai et chaque réponse est expliquée.') +
       '<div class="quiz-list top">' +
         '<a class="quiz-tile feature" href="#quiz-examen"><strong>Examen final</strong><span>30 questions tirées de toutes les leçons et du lexique' + best("examen") + '</span></a>' +
         '<a class="quiz-tile hard" href="#quiz-difficile"><strong>Défi : questions difficiles</strong><span>20 mises en situation et questions pièges, parmi ' + nHard + best("difficile") + '</span></a>' +
         (nErr
           ? '<a class="quiz-tile errors" href="#quiz-erreurs"><strong>Revoir mes erreurs</strong><span>' + nErr + ' question' + (nErr > 1 ? 's' : '') + ' ratée' + (nErr > 1 ? 's' : '') + ' à retravailler</span></a>'
           : '<div class="quiz-tile errors is-empty"><strong>Revoir mes erreurs</strong><span>Tes questions ratées apparaîtront ici. Une bonne réponse les retire.</span></div>') +
-        '<a class="quiz-tile" href="#quiz-pharma"><strong>Examen pharmaceutique</strong><span>25 questions sur le médicament et la pharmacie' + best("pharma") + '</span></a>' +
-        '<a class="quiz-tile" href="#quiz-lexique"><strong>Quiz du lexique</strong><span>15 mots : définitions et traductions anglaises' + best("lexique") + '</span></a>' +
+        '<a class="quiz-tile" data-zone="pharma" style="border-left:6px solid var(--accent)" href="#quiz-pharma"><strong>Examen pharmaceutique</strong><span>25 questions sur le médicament et la pharmacie' + best("pharma") + '</span></a>' +
+        '<a class="quiz-tile" data-zone="lexique" style="border-left:6px solid var(--accent)" href="#quiz-lexique"><strong>Quiz du lexique</strong><span>15 mots : définitions et traductions anglaises' + best("lexique") + '</span></a>' +
         tiles +
       '</div>',
       "Quiz"
@@ -384,6 +435,7 @@
 
   function viewQuiz(id) {
     setNav("quiz");
+    setZone("quiz");
     var quiz = getQuiz(id);
     if (!quiz) return viewQuizList();
     if (quiz.vide) {
